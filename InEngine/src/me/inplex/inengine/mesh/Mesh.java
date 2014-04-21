@@ -8,6 +8,7 @@ public class Mesh {
 
 	public List<Vector3f> vertexes = new ArrayList<Vector3f>();
 	public List<Vector3f> faces    = new ArrayList<Vector3f>();
+	public List<Vector3f> normals  = new ArrayList<Vector3f>();
 
 
 	public void addVertex(Vector3f vertex){
@@ -15,6 +16,10 @@ public class Mesh {
 	}
 
 	public void addFace(Vector3f face){
+		faces.add(face);
+	}
+	
+	public void addNormal(Vector3f face){
 		faces.add(face);
 	}
 

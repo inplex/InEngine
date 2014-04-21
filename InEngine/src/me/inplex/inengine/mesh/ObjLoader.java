@@ -26,12 +26,12 @@ public class ObjLoader {
 					vector.y = Float.parseFloat(line.split(" ")[2]);
 					vector.z = Float.parseFloat(line.split(" ")[3]);
 					mesh.addVertex(vector);
-				} else if (line.startsWith("vn ")){			//for older files
+				} else if (line.startsWith("vn ")){	
 					Vector3f vector = new Vector3f();
 					vector.x = Float.parseFloat(line.split(" ")[1]);
 					vector.y = Float.parseFloat(line.split(" ")[2]);
 					vector.z = Float.parseFloat(line.split(" ")[3]);
-					mesh.addVertex(vector);
+					mesh.addNormal(vector);
 				} else if (line.startsWith("f ")){
 					Vector3f vector = new Vector3f();
 					vector.x = Float.parseFloat(line.split(" ")[1]);

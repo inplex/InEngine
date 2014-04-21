@@ -19,8 +19,7 @@ public class Entity {
 	
 	
 	
-	public Entity(Mesh mesh,World world){
-		world.add(this);
+	public Entity(Mesh mesh){
 		this.mesh = mesh;
 	}
 	

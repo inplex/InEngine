@@ -21,7 +21,8 @@ public class TestGame extends Game {
 	@Override
 	protected void onInit() {
 		getRenderer().setWorld(world);
-		new Entity(ObjLoader.load("res//teapot.obj"),world);
+		Entity teapot = new Entity(ObjLoader.load("res//teapot.obj"));
+		world.add(teapot);
 
 
 
