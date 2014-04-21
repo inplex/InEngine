@@ -2,21 +2,17 @@ package me.inplex.inengine;
 
 import me.inplex.inengine.entity.Entity;
 import me.inplex.inengine.mesh.ObjLoader;
-import me.inplex.inengine.world.World;
 
 import org.lwjgl.LWJGLException;
 
 public class TestGame extends Game {
 	
-	World world = new World();
-	
 	@Override
 	protected void onInit() {
-		getRenderer().setWorld(world);
 		Entity entity1 = new Entity(ObjLoader.load("res//test1.obj"), 0f, 0f, 0f);
 		Entity entity2 = new Entity(ObjLoader.load("res//test2.obj"), 50f, 0f, 0f);
-		world.add(entity1);
-		world.add(entity2);
+		getRenderer().getWorld().add(entity1);
+		getRenderer().getWorld().add(entity2);
 	}
 
 	

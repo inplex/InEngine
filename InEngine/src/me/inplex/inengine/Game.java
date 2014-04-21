@@ -26,6 +26,7 @@ public class Game implements Runnable {
 
 	public Game() {
 		this.renderer = new Renderer();
+		
 	}
 
 	/*
