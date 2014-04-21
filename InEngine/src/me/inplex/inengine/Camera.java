@@ -6,16 +6,16 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
 
 public class Camera {
-
+	
 	private Vector3f translation;
 	private Vector3f rotation;
-
+	
 	final float speedNormal = 1.2f;
 	final float speedSprinting = 12.5f;
-
+	
 	public static final float pi180 = 0.017453295f;
 	public static final float scale = 0.2f;
-
+	
 	boolean sprinting = false;
 
 	boolean onGround = false;
@@ -23,7 +23,7 @@ public class Camera {
 	float acc = 1.0f;
 
 	public Camera() {
-		translation = new Vector3f(-150, -10, -150);
+		translation = new Vector3f(0, 0, -10);
 		rotation = new Vector3f(0, 0, 0);
 	}
 

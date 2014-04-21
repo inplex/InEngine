@@ -16,8 +16,11 @@ public class Entity {
 
 	private Mesh mesh;
 	
-	public Entity(Mesh mesh) {
+	public Entity(Mesh mesh, float x, float y, float z) {
 		this.mesh = mesh;
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
 
 	public void moveRelative(float x, float y, float z) {

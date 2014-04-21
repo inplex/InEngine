@@ -37,17 +37,20 @@ public class Renderer {
 		glRotatef(360 - camera.getRotation().z, 0.0f, 0.0f, 1.0f);
 		glTranslatef(camera.getTranslation().x, camera.getTranslation().y, camera.getTranslation().z);
 		glColor3f(0.0f, 0.0f, 0.0f);
-		GL11.glBegin(GL11.GL_TRIANGLES);
 		GL11.glColor3f(1f, 1f, 1f);
 		for (Entity entity : world.list) {
+			glTranslatef(entity.getX(), entity.getY(), entity.getZ());
+			GL11.glBegin(GL11.GL_QUADS);
 			for (Face face : entity.getMesh().getFaces()) {
 				for (int i = 0; i < (face.isEdge() ? 2 : 3); i++) {
 					Vector3f v = face.getVertices()[i];
 					GL11.glVertex3f(v.x, v.y, v.z);
 				}
 			}
+			glTranslatef(0, 0, 0);
+			GL11.glEnd();
 		}
-		GL11.glEnd();
+		
 		glTranslatef(0, 0, 0);
 	}
 

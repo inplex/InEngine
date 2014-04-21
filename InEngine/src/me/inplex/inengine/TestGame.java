@@ -1,32 +1,22 @@
 package me.inplex.inengine;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-
 import me.inplex.inengine.entity.Entity;
-import me.inplex.inengine.mesh.Mesh;
 import me.inplex.inengine.mesh.ObjLoader;
 import me.inplex.inengine.world.World;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.glu.GLU;
 
 public class TestGame extends Game {
 	
 	World world = new World();
-
 	
 	@Override
 	protected void onInit() {
 		getRenderer().setWorld(world);
-		Entity teapot = new Entity(ObjLoader.load("res//monkey.obj"));
-		world.add(teapot);
-
-
-
-		 GLU.gluPerspective (600f,900f/600f,1f, 1f);
+		Entity entity1 = new Entity(ObjLoader.load("res//test1.obj"), 0f, 0f, 0f);
+		Entity entity2 = new Entity(ObjLoader.load("res//test2.obj"), 50f, 0f, 0f);
+		world.add(entity1);
+		world.add(entity2);
 	}
 
 	
