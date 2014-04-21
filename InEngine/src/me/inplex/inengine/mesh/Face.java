@@ -6,11 +6,11 @@ public class Face {
 
 	Vector3f[] vertices = new Vector3f[4];
 
-	boolean isEdge() {
+	public boolean isEdge() {
 		return vertices[3] == null;
 	}
 	
-	boolean isSurface() {
+	public boolean isSurface() {
 		return !isEdge();
 	}
 
