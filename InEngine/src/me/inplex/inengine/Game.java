@@ -63,6 +63,7 @@ public class Game implements Runnable {
 	}
 
 	private final void render() {
+		renderer.render();
 	}
 
 	public final void setupDisplay(String title, int width, int height, boolean fullscreen, boolean resizable) throws LWJGLException {
