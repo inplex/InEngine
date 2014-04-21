@@ -1,5 +1,14 @@
 package me.inplex.inengine;
 
+import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
+import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
+import static org.lwjgl.opengl.GL11.GL_PROJECTION;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glLoadIdentity;
+import static org.lwjgl.opengl.GL11.glMatrixMode;
+import static org.lwjgl.opengl.GL11.glViewport;
+import static org.lwjgl.util.glu.GLU.gluPerspective;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Cursor;
@@ -60,6 +69,7 @@ public class Game implements Runnable {
 				stop();
 			}
 		}
+		renderer.update();
 	}
 
 	private final void render() {
@@ -78,7 +88,18 @@ public class Game implements Runnable {
 		Mouse.setGrabbed(true);
 		Cursor emptyCursor = new Cursor(1, 1, 0, 0, 1, BufferUtils.createIntBuffer(1), null);
 		Mouse.setNativeCursor(emptyCursor);
+		reinitGL();
 		onInit();
+	}
+	
+	private void reinitGL() {
+		glViewport(0, 0, getWidth(), getHeight());
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(45.0f, getHeight() / getHeight(), 1.0f, 1000.0f);
+		glMatrixMode(GL_MODELVIEW);
+		glEnable(GL_DEPTH_TEST);
+		glLoadIdentity();
 	}
 
 	/**

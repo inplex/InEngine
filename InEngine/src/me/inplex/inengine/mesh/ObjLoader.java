@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
 
 public class ObjLoader {
 
@@ -59,7 +58,6 @@ public class ObjLoader {
 				}
 			}
 			reader.close();
-			System.out.println(faces.size());
 			mesh.setFaces(faces);
 			return mesh;
 
