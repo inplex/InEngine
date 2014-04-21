@@ -4,14 +4,26 @@ import org.lwjgl.util.vector.Vector3f;
 
 public class Face {
 
-	Vector3f[] vertex = new Vector3f[3];
+	Vector3f[] vertices = new Vector3f[4];
 
-	boolean isEdge(){
-		return (vertex[3]==null);
+	boolean isEdge() {
+		return vertices[3] == null;
+	}
+	
+	boolean isSurface() {
+		return !isEdge();
 	}
 
-	public void vectorSet(int n,Vector3f vector){
-		vertex[n] = vector;
+	public void setVertex(int index, Vector3f vector) {
+		vertices[index] = vector;
+	}
+
+	public Vector3f[] getVertices() {
+		return vertices;
+	}
+
+	public void setVertices(Vector3f[] vertices) {
+		this.vertices = vertices;
 	}
 
 }

@@ -4,7 +4,6 @@ import me.inplex.inengine.entity.Entity;
 import me.inplex.inengine.world.World;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector4f;
 
 public class Renderer {
 	World world = null;
