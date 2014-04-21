@@ -1,6 +1,7 @@
 package me.inplex.inengine.entity;
 
 import me.inplex.inengine.mesh.Mesh;
+import me.inplex.inengine.world.World;
 
 public class Entity {
 	
@@ -14,10 +15,13 @@ public class Entity {
 	
 	boolean isVisible;
 	
+	Mesh mesh;
 	
 	
-	public Entity(Mesh mesh){
-		
+	
+	public Entity(Mesh mesh,World world){
+		world.add(this);
+		this.mesh = mesh;
 	}
 	
 	
@@ -47,6 +51,10 @@ public class Entity {
 	
 	public void setVisible(boolean visible){
 		this.isVisible = visible;
+	}
+	
+	public Mesh getMesh(){
+		return this.mesh;
 	}
 	
 	
