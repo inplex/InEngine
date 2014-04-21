@@ -3,11 +3,13 @@ package me.inplex.inengine.mesh;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
 public class ObjLoader {
 
@@ -15,9 +17,11 @@ public class ObjLoader {
 
 		try {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(file))));
-			
+
 			Mesh mesh = new Mesh();
-			
+			List<Vector3f> vertices = new ArrayList<Vector3f>();
+			List<Vector3f> normals  = new ArrayList<Vector3f>();
+
 			while (reader.ready()){
 				String line = reader.readLine();
 				if (line.startsWith("v ")){
@@ -25,19 +29,23 @@ public class ObjLoader {
 					vector.x = Float.parseFloat(line.split(" ")[1]);
 					vector.y = Float.parseFloat(line.split(" ")[2]);
 					vector.z = Float.parseFloat(line.split(" ")[3]);
-					mesh.addVertex(vector);
+					vertices.add(vector);
 				} else if (line.startsWith("vn ")){	
 					Vector3f vector = new Vector3f();
 					vector.x = Float.parseFloat(line.split(" ")[1]);
 					vector.y = Float.parseFloat(line.split(" ")[2]);
 					vector.z = Float.parseFloat(line.split(" ")[3]);
-					mesh.addNormal(vector);
+					normals.add(vector);
 				} else if (line.startsWith("f ")){
-					Vector3f vector = new Vector3f();
-					vector.x = Float.parseFloat(line.split(" ")[1]);
-					vector.y = Float.parseFloat(line.split(" ")[2]);
-					vector.z = Float.parseFloat(line.split(" ")[3]);
-					mesh.addFace(vector);
+					Face face = new Face();
+					face.vectorSet(0,vertices.get((int)Float.parseFloat(line.split(" ")[1])-1));
+					face.vectorSet(1,vertices.get((int)Float.parseFloat(line.split(" ")[2])-1));
+					face.vectorSet(2,vertices.get((int)Float.parseFloat(line.split(" ")[3])-1));
+					if (line.split(" ").length<3){
+						face.vectorSet(3,null);
+					}else{
+						face.vectorSet(3,vertices.get((int)Float.parseFloat(line.split(" ")[4])-1));
+					}
 				}
 			}
 

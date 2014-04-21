@@ -21,12 +21,12 @@ public class TestGame extends Game {
 	@Override
 	protected void onInit() {
 		getRenderer().setWorld(world);
-		Entity teapot = new Entity(ObjLoader.load("res//teapot.obj"));
+		Entity teapot = new Entity(ObjLoader.load("res//monkey.obj"));
 		world.add(teapot);
 
 
 
-		 GLU.gluPerspective (200f,800f/600f, 1f, 500.0f);
+		 GLU.gluPerspective (600f,900f/600f,1f, 1f);
 	}
 
 	
