@@ -28,7 +28,8 @@ public class Renderer {
 	public void update() {
 		camera.update();
 	}
-
+	
+	// TODO: Make this better (use VBO, VertexAttribArray)
 	public void render() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
