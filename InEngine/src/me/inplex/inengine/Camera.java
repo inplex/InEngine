@@ -40,9 +40,6 @@ public class Camera {
 			speed = speedSprinting;
 		}
 		
-		System.out.println("translation: " + translation);
-		System.out.println("rotation: " + rotation);
-		
 		if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
 			translation.z += Math.cos(rotation.y * pi180) * scale * speed;
 			translation.x += Math.sin(rotation.y * pi180) * scale * speed;
