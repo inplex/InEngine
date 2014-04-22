@@ -10,7 +10,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 public class Mesh {
 
-	private static int lastId = 1;
+	private static int lastId = 0;
 
 	private List<Face> faces;
 
@@ -20,41 +20,40 @@ public class Mesh {
 		this.faces = new ArrayList<Face>();
 		this.id = lastId++;
 	}
-	
+
 	// TODO: Make this better (use VBO, VertexAttribArray)
 	public void render() {
+		
 		glColor3f(1f, 1f, 1f);
-		GL11.glBegin(GL11.GL_QUADS);
-		{
-			for (Face face : faces) {
-				for (int i = 0; i < (face.isEdge() ? 2 : 3); i++) {
-					Vector3f vertex = face.getVertices()[i];
-					GL11.glVertex3f(vertex.x, vertex.y, vertex.z);
-					if (face.hasNormals() && i < 3) {
-						Vector3f normal = face.getNormals()[i];
-						GL11.glVertex3f(normal.x, normal.y, normal.z);
-					}
+		for (Face face : faces) {
+			glColor3f(1f, 1f, 1f);
+			GL11.glBegin(face.isEdge() ? GL11.GL_TRIANGLES : GL11.GL_QUADS);
+			for (int i = 0; i < (face.isEdge() ? 2 : 3); i++) {
+				Vector3f vertex = face.getVertices()[i];
+				GL11.glVertex3f(vertex.x, vertex.y, vertex.z);
+				if (face.hasNormals() && i < 3) {
+					Vector3f normal = face.getNormals()[i];
+					GL11.glVertex3f(normal.x, normal.y, normal.z);
 				}
 			}
 		}
-		GL11.glEnd();
-
+		
 		// Draw Outline
 		glColor3f(0f, 0f, 0f);
-		GL11.glBegin(GL11.GL_LINES);
-		{
-			for (Face face : faces) {
-				for (int i = 0; i < (face.isEdge() ? 2 : 3); i++) {
-					Vector3f vertex = face.getVertices()[i];
-					GL11.glVertex3f(vertex.x, vertex.y, vertex.z);
-					if (face.hasNormals() && i < 3) {
-						Vector3f normal = face.getNormals()[i];
-						GL11.glVertex3f(normal.x, normal.y, normal.z);
-					}
+		for (Face face : faces) {
+			glColor3f(0f, 0f, 0f);
+			GL11.glBegin(face.isEdge() ? GL11.GL_TRIANGLES : GL11.GL_QUADS);
+			for (int i = 0; i < (face.isEdge() ? 2 : 3); i++) {
+				Vector3f vertex = face.getVertices()[i];
+				GL11.glVertex3f(vertex.x, vertex.y, vertex.z);
+				if (face.hasNormals() && i < 3) {
+					Vector3f normal = face.getNormals()[i];
+					GL11.glVertex3f(normal.x, normal.y, normal.z);
 				}
 			}
+			GL11.glEnd();
 		}
-		GL11.glEnd();
+		glColor3f(1f, 1f, 1f);
 	}
 
 	public List<Face> getFaces() {
