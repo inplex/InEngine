@@ -3,12 +3,13 @@ package me.inplex.inengine;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 public class Camera {
 	
 	private Vector3f translation;
-	private Vector3f rotation;
+	private Vector2f rotation;
 	
 	final float speedNormal = 1.2f;
 	final float speedSprinting = 12.5f;
@@ -24,7 +25,7 @@ public class Camera {
 
 	public Camera() {
 		translation = new Vector3f(0, 0, -10);
-		rotation = new Vector3f(0, 0, 0);
+		rotation = new Vector2f(0, 0);
 	}
 
 	public void update() {
@@ -38,7 +39,10 @@ public class Camera {
 		if (sprinting) {
 			speed = speedSprinting;
 		}
-
+		
+		System.out.println("translation: " + translation);
+		System.out.println("rotation: " + rotation);
+		
 		if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
 			translation.z += Math.cos(rotation.y * pi180) * scale * speed;
 			translation.x += Math.sin(rotation.y * pi180) * scale * speed;
@@ -102,7 +106,7 @@ public class Camera {
 		return translation;
 	}
 
-	public Vector3f getRotation() {
+	public Vector2f getRotation() {
 		return rotation;
 	}
 

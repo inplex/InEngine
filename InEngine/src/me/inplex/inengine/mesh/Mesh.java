@@ -20,7 +20,8 @@ public class Mesh {
 		this.faces = new ArrayList<Face>();
 		this.id = lastId++;
 	}
-
+	
+	// TODO: Make this better (use VBO, VertexAttribArray)
 	public void render() {
 		glColor3f(1f, 1f, 1f);
 		GL11.glBegin(GL11.GL_QUADS);

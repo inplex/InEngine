@@ -27,14 +27,12 @@ public class Renderer {
 		camera.update();
 	}
 	
-	// TODO: Make this better (use VBO, VertexAttribArray)
 	public void render() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glLoadIdentity();
 		glClearColor(0.2f, 0.2f, 0.6f, 1.0f);
 		glRotatef(360 - camera.getRotation().x, 1.0f, 0.0f, 0.0f);
 		glRotatef(360 - camera.getRotation().y, 0.0f, 1.0f, 0.0f);
-		glRotatef(360 - camera.getRotation().z, 0.0f, 0.0f, 1.0f);
 		glTranslatef(camera.getTranslation().x, camera.getTranslation().y, camera.getTranslation().z);
 		GL11.glColor3f(1f, 1f, 1f);
 		for (Entity entity : world.list) {
