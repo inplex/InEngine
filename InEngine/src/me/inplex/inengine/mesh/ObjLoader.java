@@ -19,12 +19,10 @@ public class ObjLoader {
 
 			Mesh mesh = new Mesh();
 
-			// temporary
 			List<Vector3f> vertices = new ArrayList<Vector3f>();
 			List<Vector3f> normals = new ArrayList<Vector3f>();
-
-			// given to the mesh object
 			List<Face> faces = new ArrayList<Face>();
+			
 			while (reader.ready()) {
 				String line = reader.readLine();
 				if (line.startsWith("v ")) {
@@ -42,38 +40,40 @@ public class ObjLoader {
 				} else if (line.startsWith("f ")) {
 					if (line.contains("//")) {
 						Face face = new Face();
-						Vector3f[] faceVertices = new Vector3f[4];
-						Vector3f[] faceNormals = new Vector3f[3];
-						faceVertices[0] = vertices.get(Integer.parseInt(line.split(" ")[1].split("//")[0])-1);
-						faceVertices[1] = vertices.get(Integer.parseInt(line.split(" ")[2].split("//")[0])-1);
-						faceVertices[2] = vertices.get(Integer.parseInt(line.split(" ")[3].split("//")[0])-1);
-						
-						faceNormals[0] = normals.get(Integer.parseInt(line.split(" ")[1].split("//")[1])-1);
-						faceNormals[1] = normals.get(Integer.parseInt(line.split(" ")[2].split("//")[1])-1);
-						faceNormals[2] = normals.get(Integer.parseInt(line.split(" ")[3].split("//")[1])-1);
-						face.setVertices(faceVertices);
-						face.setNormals(faceNormals);
+						int[] faceVertexIds = new int[4];
+						int[] faceNormalIds = new int[3];
+						faceVertexIds[0] = Integer.parseInt(line.split(" ")[1].split("//")[0]);
+						faceVertexIds[1] = Integer.parseInt(line.split(" ")[2].split("//")[0]);
+						faceVertexIds[2] = Integer.parseInt(line.split(" ")[3].split("//")[0]);
+
+						faceNormalIds[0] = Integer.parseInt(line.split(" ")[1].split("//")[1]);
+						faceNormalIds[1] = Integer.parseInt(line.split(" ")[2].split("//")[1]);
+						faceNormalIds[2] = Integer.parseInt(line.split(" ")[3].split("//")[1]);
+						face.setVertexIds(faceVertexIds);
+						face.setNormalIds(faceNormalIds);
 						faces.add(face);
 					} else {
 						Face face = new Face();
-						Vector3f[] faceVertices = new Vector3f[4];
+						int[] faceVertices = new int[4];
 						// 4th fector is null if Face is an edge
 						// id -1 because vertex ids start at 1, not at 0
-						faceVertices[0] = vertices.get(Integer.parseInt(line.split(" ")[1]) - 1);
-						faceVertices[1] = vertices.get(Integer.parseInt(line.split(" ")[2]) - 1);
-						faceVertices[2] = vertices.get(Integer.parseInt(line.split(" ")[3]) - 1);
+						faceVertices[0] = Integer.parseInt(line.split(" ")[1]);
+						faceVertices[1] = Integer.parseInt(line.split(" ")[2]);
+						faceVertices[2] = Integer.parseInt(line.split(" ")[3]);
 						// if line.split(" ").length >= 5 then it face is a
 						// surface,
 						// otherwise an edge
 						if (line.split(" ").length >= 5) {
-							faceVertices[3] = vertices.get(Integer.parseInt(line.split(" ")[4]) - 1);
+							faceVertices[3] = Integer.parseInt(line.split(" ")[4]);
 						}
-						face.setVertices(faceVertices);
+						face.setVertexIds(faceVertices);
 						faces.add(face);
 					}
 				}
 			}
 			reader.close();
+			mesh.setVertices(vertices);
+			mesh.setNormals(normals);
 			mesh.setFaces(faces);
 			return mesh;
 

@@ -1,19 +1,21 @@
 package me.inplex.inengine.mesh;
 
-import org.lwjgl.util.vector.Vector3f;
+import java.util.Arrays;
 
 public class Face {
 
-	Vector3f[] vertices;
-	Vector3f[] normals;
+	int[] vertexIds;
+	int[] normalIds;
 
 	public Face() {
-		vertices = new Vector3f[4];
-		normals = new Vector3f[4];
+		vertexIds = new int[4];
+		normalIds = new int[4];
+		Arrays.fill(vertexIds, -1);
+		Arrays.fill(normalIds, -1);
 	}
 	
 	public boolean isEdge() {
-		return vertices[3] == null;
+		return vertexIds[3] == -1;
 	}
 	
 	public boolean isSurface() {
@@ -21,31 +23,31 @@ public class Face {
 	}
 	
 	public boolean hasNormals() {
-		return normals[0] != null;
+		return normalIds[0] != -1;
 	}
 
-	public void setVertex(int index, Vector3f vector) {
-		vertices[index] = vector;
+	public void setVertexId(int index, int id) {
+		vertexIds[index] = id;
 	}
 
-	public Vector3f[] getVertices() {
-		return vertices;
+	public int[] getVertexIds() {
+		return vertexIds;
 	}
 
-	public void setVertices(Vector3f[] vertices) {
-		this.vertices = vertices;
+	public void setVertexIds(int[] vertexIds) {
+		this.vertexIds = vertexIds;
 	}
 	
-	public void setNormal(int index, Vector3f vector) {
-		normals[index] = vector;
+	public void setNormalId(int index, int id) {
+		normalIds[index] = id;
 	}
 
-	public Vector3f[] getNormals() {
-		return normals;
+	public int[] getNormalIds() {
+		return normalIds;
 	}
 
-	public void setNormals(Vector3f[] normals) {
-		this.normals = normals;
+	public void setNormalIds(int[] normalIds) {
+		this.normalIds = normalIds;
 	}
 
 }
