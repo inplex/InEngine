@@ -27,17 +27,15 @@ public class Mesh {
 
 	// TODO: Make this better (use VBO, VertexAttribArray)
 	public void render() {
-		
 		glColor3f(1f, 1f, 1f);
 		for (Face face : faces) {
-			glColor3f(1f, 1f, 1f);
-			GL11.glBegin(face.isEdge() ? GL11.GL_TRIANGLES : GL11.GL_QUADS);
+			GL11.glBegin(GL11.GL_TRIANGLES);
 			for (int i = 0; i < (face.isEdge() ? 2 : 3); i++) {
 				Vector3f vertex = vertices.get(face.getVertexIds()[i]-1);
 				GL11.glVertex3f(vertex.x, vertex.y, vertex.z);
 				if (face.hasNormals() && i < 3) {
-					Vector3f normal = vertices.get(face.getNormalIds()[i]-1);
-					GL11.glVertex3f(normal.x, normal.y, normal.z);
+					Vector3f normal = normals.get(face.getNormalIds()[i]-1);
+					GL11.glNormal3f(normal.x, normal.y, normal.z);
 				}
 			}
 			GL11.glEnd();
@@ -46,19 +44,17 @@ public class Mesh {
 		// Draw Outline
 		glColor3f(0f, 0f, 0f);
 		for (Face face : faces) {
-			glColor3f(0f, 0f, 0f);
 			GL11.glBegin(GL11.GL_LINES);
 			for (int i = 0; i < (face.isEdge() ? 2 : 3); i++) {
 				Vector3f vertex = vertices.get(face.getVertexIds()[i]-1);
 				GL11.glVertex3f(vertex.x, vertex.y, vertex.z);
 				if (face.hasNormals() && i < 3) {
-					Vector3f normal = vertices.get(face.getNormalIds()[i]-1);
-					GL11.glVertex3f(normal.x, normal.y, normal.z);
+					Vector3f normal = normals.get(face.getNormalIds()[i]-1);
+					GL11.glNormal3f(normal.x, normal.y, normal.z);
 				}
 			}
 			GL11.glEnd();
 		}
-		glColor3f(1f, 1f, 1f);
 	}
 
 	public List<Face> getFaces() {
