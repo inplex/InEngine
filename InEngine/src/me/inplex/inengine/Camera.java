@@ -19,10 +19,6 @@ public class Camera {
 	
 	boolean sprinting = false;
 
-	boolean onGround = false;
-	float jump = 0.0f;
-	float acc = 1.0f;
-
 	public Camera() {
 		translation = new Vector3f(0, 0, -10);
 		rotation = new Vector2f(0, 0);
@@ -62,29 +58,11 @@ public class Camera {
 			sprinting = false;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
-			if (onGround) {
-				jump = 10f;
-			}
+			translation.y--;
 		}
-
-		updateGravity();
-	}
-
-	private void updateGravity() {
-		if (!(translation.y + scale >= -3))
-			onGround = false;
-		else
-			onGround = true;
-
-		if (!onGround) {
-			translation.y += scale;
+		if (Keyboard.isKeyDown(Keyboard.KEY_LCONTROL)) {
+			translation.y++;
 		}
-
-		if (jump > 0.0f) {
-			translation.y -= jump / 10;
-			jump -= acc;
-		}
-
 	}
 
 	private void handleMouse() {
